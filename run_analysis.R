@@ -31,9 +31,9 @@ fetch_data <-
 read_data <- function(baseDir, datasetName) {
   read_columns <- function(filePath) {
     read.csv2(filePath,
-                      header = FALSE,
-                      sep = " ",
-                      skip = 0)
+              header = FALSE,
+              sep = " ",
+              skip = 0)
   }
   dir <- file.path(baseDir, datasetName)
   # get all feature names from file
@@ -72,12 +72,15 @@ read_data <- function(baseDir, datasetName) {
   names(activities) <- c("activity_id")
   library(dplyr)
   # 3. Uses descriptive activity names to name the activities in the data set
-  activities <- inner_join(activities, activityLabels, by = "activity_id")
+  activities <-
+    inner_join(activities, activityLabels, by = "activity_id")
   # concatenate horizontally columns and table into one big table
-  finalData <- cbind.data.frame(subjects, activities["activity_label"], selectedData)
+  finalData <-
+    cbind.data.frame(subjects, activities["activity_label"], selectedData)
   # put _ instead of . and ... to make it look nice
-  # 4. Appropriately labels the data set with descriptive variable names. 
-  names(finalData) <- gsub("\\.", "_", gsub("\\.\\.\\.", "_", names(finalData)))
+  # 4. Appropriately labels the data set with descriptive variable names.
+  names(finalData) <-
+    gsub("\\.", "_", gsub("\\.\\.\\.", "_", names(finalData)))
   finalData
 }
 
@@ -85,7 +88,8 @@ cat("Starting script ...\n")
 
 # download dataset files and unarchive them
 # optionally you may call it with ds.basedir = <your dir with dataset archive and/or unarchived dataset>
-dataDir <- fetch_data(removeDownloaded = FALSE, ds.additionalName = "")
+dataDir <-
+  fetch_data(removeDownloaded = FALSE, ds.additionalName = "")
 cat("Working with dataset files in ", dataDir, "\n")
 # read test data
 cat("Reading test data.\n")
@@ -100,7 +104,8 @@ combined <- rbind.data.frame(testData, trainData)
 library(dplyr)
 # 5. tidy data set with the average of each variable for each activity and each subject
 cat("Preparing tidy data.\n")
-tidyData <- combined %>% group_by(subject_id, activity_label) %>% summarise_each(funs(mean))
+tidyData <-
+  combined %>% group_by(subject_id, activity_label) %>% summarise_each(funs(mean))
 
 outputFile <- file.path(dataDir, "tidy_data.txt")
 cat("Writing tidy data into ", outputFile, "\n")
@@ -112,4 +117,3 @@ write.table(tidyData, file = outputFile, quote = FALSE, row.names = FALSE)
 # head(tidy_data)
 
 cat("Finishing script.\n")
-
