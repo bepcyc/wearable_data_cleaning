@@ -1,11 +1,14 @@
 #!/usr/bin/env Rscript
 # fetch dataset from the internet and unzip it
 fetch_data <-
-  function (ds.basedir = tempdir(), removeDownloaded = TRUE, ds.additionalName = "UCI HAR Dataset") {
-    ds.dir <- file.path(ds.basedir)
+  function (ds.dir = tempdir(), existingDataset = TRUE, removeDownloaded = TRUE, ds.additionalName = "UCI HAR Dataset") {
     ds.zipfile <- file.path(ds.dir, "dataset.zip")
     if (!dir.exists(ds.dir)) {
       dir.create(ds.dir, showWarnings = TRUE)
+    } else {
+      cat("Skipping creation of ", ds.dir, "\n")
+    }
+    if (!existingDataset) {
       if (!file.exists(ds.zipfile)) {
         # URL of the dataset
         ds.url <-
@@ -19,8 +22,6 @@ fetch_data <-
         cat("File ", ds.zipfile, " already exists. Skipping download phase.\n")
       }
       unzipped <- unzip(zipfile = ds.zipfile, exdir = ds.dir)
-    } else {
-      cat("Skipping creation of ", ds.dir, "\n")
     }
     if (removeDownloaded)
       file.remove(ds.zipfile)
@@ -89,7 +90,7 @@ cat("Starting script ...\n")
 # download dataset files and unarchive them
 # optionally you may call it with ds.basedir = <your dir with dataset archive and/or unarchived dataset>
 dataDir <-
-  fetch_data(removeDownloaded = FALSE, ds.additionalName = "")
+  fetch_data(ds.dir = getwd(), removeDownloaded = FALSE, ds.additionalName = "")
 cat("Working with dataset files in ", dataDir, "\n")
 # read test data
 cat("Reading test data.\n")
