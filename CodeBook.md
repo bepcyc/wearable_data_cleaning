@@ -18,7 +18,7 @@ To prevent reading problems all of the columns have the same simple naming forma
     * STANDING
     * LAYING
 
-##Mean values for measurements:
+##Mean values for measurements
 - column names:
     * tBodyAcc_mean_X
     * tBodyAcc_mean_Y
@@ -45,3 +45,31 @@ To prevent reading problems all of the columns have the same simple naming forma
     * fBodyGyro_mean_Y
     * fBodyGyro_mean_Z
 - column values: `double` mean values for given **subject** and **activity** for the device parameter measured.
+
+##Standard deviation values for measurements
+- column names:
+    * tBodyAcc_std_X
+    * tBodyAcc_std_Y
+    * tBodyAcc_std_Z
+    * tGravityAcc_std_X
+    * tGravityAcc_std_Y
+    * tGravityAcc_std_Z
+    * tBodyAccJerk_std_X
+    * tBodyAccJerk_std_Y
+    * tBodyAccJerk_std_Z
+    * tBodyGyro_std_X
+    * tBodyGyro_std_Y
+    * tBodyGyro_std_Z
+    * tBodyGyroJerk_std_X
+    * tBodyGyroJerk_std_Y
+    * tBodyGyroJerk_std_Z
+    * fBodyAcc_std_X
+    * fBodyAcc_std_Y
+    * fBodyAcc_std_Z
+    * fBodyAccJerk_std_X
+    * fBodyAccJerk_std_Y
+    * fBodyAccJerk_std_Z
+    * fBodyGyro_std_X
+    * fBodyGyro_std_Y
+    * fBodyGyro_std_Z
+- column values: `double` values of standard deviation for given **subject** and **activity** for the device parameter measured.
