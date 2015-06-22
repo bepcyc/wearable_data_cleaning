@@ -6,7 +6,7 @@
 File has a csv/tsv format with header and a **space** character used as a delimiter. Data is not quoted.
 First column uses integers as values.
 Second column uses letters in uppercase and underscores for values.
-All other columns have `floating point` values.
+All other columns use `floating point` values.
 
 ###Header
 To prevent automated reading problems all of the columns have the same simple naming format: **word1_word2_word3_..wordN**
@@ -51,7 +51,7 @@ To prevent automated reading problems all of the columns have the same simple na
     * fBodyGyro_mean_X
     * fBodyGyro_mean_Y
     * fBodyGyro_mean_Z
-- values: `floating point` aggregate mean value for given **subject** and **activity** for all the mean device parameter values measured.
+- values: `floating point` aggregate mean value for a given **subject** and **activity** for all the mean device parameter values measured.
 
 ##Standard deviation values for measurements
 - column names:
@@ -79,4 +79,4 @@ To prevent automated reading problems all of the columns have the same simple na
     * fBodyGyro_std_X
     * fBodyGyro_std_Y
     * fBodyGyro_std_Z
-- values: `floating point` aggregate mean value of standard deviation for given **subject** and **activity** for the device parameter measured.
+- values: `floating point` aggregate mean value of standard deviation for a given **subject** and **activity** for the device parameter measured.
