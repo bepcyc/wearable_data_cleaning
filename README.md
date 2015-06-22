@@ -21,17 +21,39 @@ cd wearable_data_cleaning
 
 ###Prerequisites
 
-- As it's been [said](https://class.coursera.org/getdata-015/human_grading/view/courses/973502/assessments/3/submissions) that:
-'''
-The code should have a file run_analysis.R in the main directory that can be run as long as the Samsung data is in your working directory
-'''
-The code supposes that data files are already in your working directory, e.i. if your working directory is \<mywd\>, then there should be files __\<mywd\>/features.txt__, __\<mywd\>/test/X_test.txt__ etc.
-If you think this directory layout is strange you can comment the lines number 92 and 93:
-```r
-dataDir <-
-  fetch_data(ds.dir = getwd(), removeDownloaded = FALSE, ds.additionalName = "")
+- You'll have to install next libraries: **dplyr**, **LaF** <br>
+  Please use this command in `R`:
+  ```r
+  install.packages("dplyr", "LaF")
+  ```
+  <br>**NOTE:** LaF is used instead of more standard **fread** and **read.fwf** as fread has currently a [bug](https://github.com/Rdatatable/data.table/issues/956) and read.fwf is extremely slow.
+- As it says [here](https://class.coursera.org/getdata-015/human_grading/view/courses/973502/assessments/3/submissions):<br> ```The code should have a file run_analysis.R in the main directory that can be run as long as the Samsung data is in your working directory'''
+  the code supposes that data files are already in your working directory, e.i. if your working directory is \<mywd\>, then there should be files __\<mywd\>/features.txt__, __\<mywd\>/test/X_test.txt__ etc.
+  If you think this directory layout is strange you can comment the lines number 92 and 93:
+  ```r
+  dataDir <-
+    fetch_data(ds.dir = getwd(), removeDownloaded = FALSE, ds.additionalName = "")
+  ```
+  and uncomment the line 95:
+  ```r
+  dataDir <- fetch_data(existingDataset = FALSE)
+  ```
+  In this case the dataset will be downloaded and unpacked automatically into temporary directory.
+
+###Running the script
+
+Run the script either from command line:
+```bash
+Rscript run_analysis.R
 ```
-and uncomment the line 95:
-```r
-dataDir <- fetch_data(existingDataset = FALSE)
+
+Or open it in `RStudio` and run with **Ctrl+Shift+S** or **Source** button.
+Optionally you can set a working directory (i.e. data directory) with **Ctrl+Shift+H**.
+
+###Obtaining the results
+During the execution you'll see a message:
+
 ```
+Writing tidy data into  /some/dir/tidy_data.txt
+```
+Please find the resulting file in the specified directory.
