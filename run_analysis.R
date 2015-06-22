@@ -91,6 +91,8 @@ cat("Starting script ...\n")
 # optionally you may call it with ds.basedir = <your dir with dataset archive and/or unarchived dataset>
 dataDir <-
   fetch_data(ds.dir = getwd(), removeDownloaded = FALSE, ds.additionalName = "")
+# uncomment to prepare the dataset automatically
+# dataDir <- fetch_data(existingDataset = FALSE)
 cat("Working with dataset files in ", dataDir, "\n")
 # read test data
 cat("Reading test data.\n")
@@ -118,3 +120,4 @@ write.table(tidyData, file = outputFile, quote = FALSE, row.names = FALSE)
 # head(tidy_data)
 
 cat("Finishing script.\n")
+
