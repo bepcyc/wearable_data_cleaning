@@ -22,9 +22,9 @@ fetch_data <-
         cat("File ", ds.zipfile, " already exists. Skipping download phase.\n")
       }
       unzipped <- unzip(zipfile = ds.zipfile, exdir = ds.dir)
+      if (removeDownloaded)
+        file.remove(ds.zipfile)
     }
-    if (removeDownloaded)
-      file.remove(ds.zipfile)
     file.path(ds.dir, ds.additionalName)
   }
 
@@ -47,9 +47,9 @@ read_data <- function(baseDir, datasetName) {
     # we can skip sort, but just to keep things in their original order we use it
     sort(c(
       # filter mean columns
-      grep("-mean()-", allFeatures, fixed = TRUE),
+      grep("mean()", allFeatures, fixed = TRUE),
       # filter standart deviation columns
-      grep("-std()-", allFeatures, fixed = TRUE)
+      grep("std()", allFeatures, fixed = TRUE)
     ))
   
   library(LaF)
@@ -81,7 +81,7 @@ read_data <- function(baseDir, datasetName) {
   # put _ instead of . and ... to make it look nice
   # 4. Appropriately labels the data set with descriptive variable names.
   names(finalData) <-
-    gsub("\\.", "_", gsub("\\.\\.\\.", "_", names(finalData)))
+    gsub("_$", "", gsub("__", "_", gsub("\\.", "_", gsub("\\.\\.\\.", "_", names(finalData)))))
   finalData
 }
 
@@ -89,10 +89,10 @@ cat("Starting script ...\n")
 
 # download dataset files and unarchive them
 # optionally you may call it with ds.basedir = <your dir with dataset archive and/or unarchived dataset>
-#dataDir <-
-#  fetch_data(ds.dir = getwd(), removeDownloaded = FALSE, ds.additionalName = "")
+dataDir <-
+  fetch_data(ds.dir = getwd(), removeDownloaded = FALSE, ds.additionalName = "")
 # uncomment to prepare the dataset automatically
-dataDir <- fetch_data(existingDataset = FALSE)
+#dataDir <- fetch_data(existingDataset = FALSE)
 cat("Working with dataset files in ", dataDir, "\n")
 # read test data
 cat("Reading test data.\n")
@@ -112,6 +112,7 @@ tidyData <-
 
 outputFile <- file.path(dataDir, "tidy_data.txt")
 cat("Writing tidy data into ", outputFile, "\n")
+cat(dim(tidyData))
 write.table(tidyData, file = outputFile, quote = FALSE, row.names = FALSE)
 
 ## uncomment for testing and reviewing ;)
