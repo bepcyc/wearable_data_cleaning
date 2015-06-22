@@ -21,12 +21,14 @@ cd wearable_data_cleaning
 
 ###Prerequisites
 
-- You'll have to install next libraries: **dplyr**, **LaF** <br>
-  Please use this command in `R`:
+- For development I used the latest version of 'RStudio' available now - **0.99.447**. If something does not work for you, please upgrade.
+- You'll have to install next libraries: **dplyr** and **LaF**<br>
+  Please use this command in `R` to install the dependencies:
 ```r
-install.packages("dplyr", "LaF")
+install.packages("dplyr")
+install.packages("LaF")
 ```
-  <br>**NOTE:** LaF is used instead of more standard **fread** and **read.fwf** as fread has currently a [bug](https://github.com/Rdatatable/data.table/issues/956) and read.fwf is extremely slow.
+  <br>**NOTE:** LaF is used instead of more typical **fread** and **read.fwf** as fread has currently a [bug](https://github.com/Rdatatable/data.table/issues/956) and read.fwf is extremely slow.
 - As it says [here](https://class.coursera.org/getdata-015/human_grading/view/courses/973502/assessments/3/submissions):<br>
 ```The code should have a file run_analysis.R in the main directory that can be run as long as the Samsung data is in your working directory```<br>
   the code supposes that data files are already in your working directory, e.g. if your working directory is \<mywd\>, then there should be files __\<mywd\>/features.txt__, __\<mywd\>/test/X_test.txt__ etc.

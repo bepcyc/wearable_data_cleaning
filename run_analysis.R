@@ -3,7 +3,7 @@
 fetch_data <-
   function (ds.dir = tempdir(), existingDataset = TRUE, removeDownloaded = TRUE, ds.additionalName = "UCI HAR Dataset") {
     ds.zipfile <- file.path(ds.dir, "dataset.zip")
-    if (!dir.exists(ds.dir)) {
+    if (!file.exists(ds.dir)) {
       dir.create(ds.dir, showWarnings = TRUE)
     } else {
       cat("Skipping creation of ", ds.dir, "\n")
@@ -13,7 +13,7 @@ fetch_data <-
         # URL of the dataset
         ds.url <-
           "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-        ds.con <- url(ds.url, method = "libcurl")
+        ds.con <- url(ds.url)
         download.result <-
           download.file(url = ds.url, destfile = ds.zipfile, method = "curl")
         close(ds.con)
@@ -89,10 +89,10 @@ cat("Starting script ...\n")
 
 # download dataset files and unarchive them
 # optionally you may call it with ds.basedir = <your dir with dataset archive and/or unarchived dataset>
-dataDir <-
-  fetch_data(ds.dir = getwd(), removeDownloaded = FALSE, ds.additionalName = "")
+#dataDir <-
+#  fetch_data(ds.dir = getwd(), removeDownloaded = FALSE, ds.additionalName = "")
 # uncomment to prepare the dataset automatically
-# dataDir <- fetch_data(existingDataset = FALSE)
+dataDir <- fetch_data(existingDataset = FALSE)
 cat("Working with dataset files in ", dataDir, "\n")
 # read test data
 cat("Reading test data.\n")
